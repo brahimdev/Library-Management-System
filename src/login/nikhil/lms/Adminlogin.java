@@ -1,3 +1,4 @@
+package login.nikhil.lms;
 
 
 import java.io.IOException;
@@ -12,19 +13,19 @@ public class Adminlogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     public Adminlogin() {
+    	super();
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String adminusername = request.getParameter("adminname");
 		String adminpassword = request.getParameter("adminpassword");
 		String submittype = request.getParameter("submit");
 		
 		if(adminusername.equals("admin") && adminpassword.equals("admin123")){
-			request.getRequestDispatcher("AdminSection.html");
+			request.getRequestDispatcher("AdminSection.html").forward(request, response);
+		}else{
+			System.out.println("Please try again!");
 		}
 		
 		
