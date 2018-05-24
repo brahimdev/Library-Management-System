@@ -38,10 +38,12 @@ public class AdminSection extends HttpServlet {
 		l.setCnumber(cnumb);
 		lib.setLibrarian(l);
 		request.getRequestDispatcher("success.html").forward(request, response);
-		}else if (submitType.equals("Delete")){
+		}
+		else if (submitType.equals("Delete")){
 			Librarian l = new Librarian();
 			l.setName(deletelib);
 			lib.deleteLibrarian(l);
+			request.getRequestDispatcher("success.html").forward(request, response);
 		}
 		
 		
