@@ -34,7 +34,7 @@ public class LibrarianDAOImpl implements LibrarianDAO {
 		
 		
 		
-		return null;
+		return lib;
 	}
 
 	@Override
