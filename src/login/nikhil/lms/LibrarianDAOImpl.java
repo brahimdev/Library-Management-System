@@ -24,9 +24,7 @@ public class LibrarianDAOImpl implements LibrarianDAO {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				lib.setName(rs.getString(1));
-			
-				
-			}
+		}
 			
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -54,6 +52,20 @@ public class LibrarianDAOImpl implements LibrarianDAO {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void deleteLibrarian(Librarian lib){
+		conn = ConnectionProvider.getCon();
+		try {
+			ps = conn.prepareStatement("delete from librarian where Name=?");
+			ps.setString(1, lib.getName());
+			ps.executeUpdate();
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	}
 

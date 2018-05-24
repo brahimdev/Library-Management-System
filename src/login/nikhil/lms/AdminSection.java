@@ -17,13 +17,20 @@ public class AdminSection extends HttpServlet {
           }
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		
+		
 		LibrarianDAO lib = new LibrarianDAOImpl();
 		String name = request.getParameter("libname");
 		String pwd = request.getParameter("libpass");
 		String city = request.getParameter("libcity");
 		String cnumb = request.getParameter("libnumber");
+		String submitType = request.getParameter("submit");
+		String deletelib = request.getParameter("Delete Librarian");
 		
+		
+		if(submitType.equals("Addlibrarian")){
 		Librarian l = new Librarian();
 		l.setName(name); 
 		l.setPassword(pwd);
@@ -31,6 +38,11 @@ public class AdminSection extends HttpServlet {
 		l.setCnumber(cnumb);
 		lib.setLibrarian(l);
 		request.getRequestDispatcher("success.html").forward(request, response);
+		}else if (submitType.equals("Delete")){
+			Librarian l = new Librarian();
+			l.setName(deletelib);
+			lib.deleteLibrarian(l);
+		}
 		
 		
 	}
