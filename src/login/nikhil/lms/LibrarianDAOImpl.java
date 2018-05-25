@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 public class LibrarianDAOImpl implements LibrarianDAO {
 	
@@ -11,26 +14,28 @@ public class LibrarianDAOImpl implements LibrarianDAO {
 	static PreparedStatement ps;
 	
 	@Override
-	public Librarian getLibrarian(Librarian lib) {
-		// TODO Auto-generated method stub
-		
-		
+	public ArrayList<Librarian> getLibrarian() {
+		ArrayList<Librarian> librarians = new ArrayList<>();
 		conn = ConnectionProvider.getCon();
-		
 		try {
-			ps=conn.prepareStatement("select * from librarian where Name=?");
-			ps.setString(1, lib.getName());
-			
+			ps=conn.prepareStatement("select * from librarian");
 			ResultSet rs = ps.executeQuery();
+			
 			while(rs.next()){
-				lib.setName(rs.getString(1));
+				Librarian l = new Librarian();
+				l.setName(rs.getString(1));
+				l.setPassword(rs.getString(2));
+				l.setCity(rs.getString(3));
+				l.setCnumber(rs.getString(4));
+				librarians.add(l);
 		}
+		
 			
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
 				
-		return lib;
+		return librarians;
 	}
 
 	@Override
