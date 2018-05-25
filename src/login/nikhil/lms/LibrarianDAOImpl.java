@@ -70,5 +70,26 @@ public class LibrarianDAOImpl implements LibrarianDAO {
 			System.out.println(e);
 		}
 	}
+	
+	public boolean Librarianlogin(Librarian lib){
+		conn = ConnectionProvider.getCon();
+		boolean status=false;
+		try {
+			ps = conn.prepareStatement("select * from librarian where Name=? and Password=?");
+			ps.setString(1, lib.getName());
+			ps.setString(2, lib.getPassword());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				status=true;
+			}else{
+				status=false;
+			}               
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
+		return status;
+	}
 	}
 
